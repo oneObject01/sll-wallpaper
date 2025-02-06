@@ -1,0 +1,65 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app",
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path" : "pages/classify/classify",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path" : "pages/userInfo/userInfo",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path" : "pages/classlist/classlist",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#676767",
+		"selectedColor": "#28B389",
+		"list": [
+			{
+				"text": "主页",
+				"iconPath": "/static/tabBar/home.png",
+				"selectedIconPath": "/static/tabBar/home-h.png",
+				"pagePath": "pages/index/index"
+			},
+			{
+				"text": "分类",
+				"iconPath": "/static/tabBar/classify.png",
+				"selectedIconPath": "/static/tabBar/classify-h.png",
+				"pagePath": "pages/classify/classify"
+			},
+			{
+				"text": "用户",
+				"iconPath": "/static/tabBar/user.png",
+				"selectedIconPath": "/static/tabBar/user-h.png",
+				"pagePath": "pages/userInfo/userInfo"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}
