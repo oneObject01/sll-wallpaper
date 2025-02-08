@@ -27,7 +27,24 @@
 			"path" : "pages/classlist/classlist",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "",
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path" : "pages/preview/preview",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path" : "pages/search/search",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"navigationStyle":"custom"
 			}
 		}
 	],

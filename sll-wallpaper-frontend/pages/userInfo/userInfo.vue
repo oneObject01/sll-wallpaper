@@ -53,6 +53,7 @@ const list2 = [
 <style lang="scss" scoped>
 .userInfo{
 	width: 100%;
+	padding-top: 10vh;
 	.userHead{
 		width: 100%;
 		padding: 50rpx 0;

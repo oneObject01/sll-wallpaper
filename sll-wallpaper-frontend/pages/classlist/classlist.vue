@@ -1,8 +1,8 @@
 <template>
 	<view class="classlist">
-		<view class="box" v-for="item in 15">
-			<image src="/common/images/preview2.jpg" mode="aspectFill"></image>
-		</view>
+		<navigator url="/pages/preview/preview" class="box" v-for="item in 15">
+				<image src="/common/images/preview2.jpg" mode="aspectFill"></image>
+		</navigator>
 	</view>
 </template>
 
