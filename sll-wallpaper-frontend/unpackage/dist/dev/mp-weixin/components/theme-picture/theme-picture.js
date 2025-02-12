@@ -1,6 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const common_assets = require("../../common/assets.js");
+const common_scripts_dateFormat = require("../../common/scripts/dateFormat.js");
 if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   _easycom_uni_icons2();
@@ -15,6 +16,16 @@ const _sfc_main = {
     isMore: {
       type: Boolean,
       default: false
+    },
+    item: {
+      type: Object,
+      default: () => {
+        return {
+          name: "默认分类",
+          picurl: "/common/images/classify1.jpg",
+          updateTime: Date.now() - 1e3 * 60 * 60 * 24 * 5
+        };
+      }
     }
   },
   setup(__props) {
@@ -22,12 +33,14 @@ const _sfc_main = {
       return common_vendor.e({
         a: !__props.isMore
       }, !__props.isMore ? {
-        b: common_assets._imports_0$4
+        b: __props.item.picurl,
+        c: common_vendor.t(common_vendor.unref(common_scripts_dateFormat.formatTimeDifference)(__props.item.updateTime)),
+        d: common_vendor.t(__props.item.name)
       } : {}, {
-        c: __props.isMore
+        e: __props.isMore
       }, __props.isMore ? {
-        d: common_assets._imports_1$1,
-        e: common_vendor.p({
+        f: common_assets._imports_0$3,
+        g: common_vendor.p({
           type: "more-filled",
           size: "30"
         })

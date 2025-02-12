@@ -1,6 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-const common_assets = require("../../common/assets.js");
+const api_apis = require("../../api/apis.js");
 if (!Array) {
   const _easycom_custom_nav_bar2 = common_vendor.resolveComponent("custom-nav-bar");
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
@@ -20,43 +20,86 @@ if (!Math) {
 const _sfc_main = {
   __name: "index",
   setup(__props) {
+    let barPic = common_vendor.ref([]);
+    let randomPic = common_vendor.ref([]);
+    let notice = common_vendor.ref([]);
+    let classifyPic = common_vendor.ref([]);
+    const goPreview = () => {
+      common_vendor.index.navigateTo({
+        url: "/pages/preview/preview"
+      });
+    };
+    const getBarPic = async () => {
+      let res = await api_apis.apiGetBarPic();
+      barPic.value = res.data;
+    };
+    const getRandomPic = async () => {
+      let res = await api_apis.apiGetRandomPic();
+      randomPic.value = res.data;
+    };
+    const getNotice = async () => {
+      let res = await api_apis.apiGetNotice({ select: true });
+      notice.value = res.data;
+    };
+    const getClassifyPic = async () => {
+      let res = await api_apis.apiGetClassifyPic({ pageSize: 8 });
+      classifyPic.value = res.data;
+      common_vendor.index.__f__("log", "at pages/index/index.vue:107", classifyPic.value);
+    };
+    getBarPic();
+    getRandomPic();
+    getNotice();
+    getClassifyPic();
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
           title: "推荐"
         }),
-        b: common_assets._imports_0,
-        c: common_assets._imports_1,
-        d: common_assets._imports_2,
-        e: common_vendor.p({
+        b: common_vendor.f(common_vendor.unref(barPic), (item, k0, i0) => {
+          return {
+            a: item.picurl,
+            b: item._id
+          };
+        }),
+        c: common_vendor.p({
           type: "sound-filled",
           size: "20"
         }),
-        f: common_vendor.f(4, (item, k0, i0) => {
-          return {};
+        d: common_vendor.f(common_vendor.unref(notice), (item, k0, i0) => {
+          return {
+            a: common_vendor.t(item.title),
+            b: item._id
+          };
         }),
-        g: common_vendor.p({
+        e: common_vendor.p({
           type: "right",
           size: "16"
         }),
-        h: common_vendor.p({
+        f: common_vendor.p({
           type: "calendar",
           size: "20"
         }),
-        i: common_vendor.p({
+        g: common_vendor.p({
           date: Date.now(),
           format: "dd日"
         }),
-        j: common_vendor.f(8, (item, k0, i0) => {
-          return {};
-        }),
-        k: common_assets._imports_3,
-        l: common_vendor.f(8, (item, k0, i0) => {
+        h: common_vendor.f(common_vendor.unref(randomPic), (item, k0, i0) => {
           return {
-            a: "1cf27b2a-7-" + i0
+            a: item.smallPicurl,
+            b: common_vendor.o(goPreview, item._id),
+            c: item._id
           };
         }),
-        m: common_vendor.p({
+        i: common_vendor.f(common_vendor.unref(classifyPic), (item, k0, i0) => {
+          return {
+            a: "1cf27b2a-7-" + i0,
+            b: common_vendor.p({
+              item
+            }),
+            c: item._id
+          };
+        }),
+        j: common_vendor.p({
           isMore: true
         })
       };

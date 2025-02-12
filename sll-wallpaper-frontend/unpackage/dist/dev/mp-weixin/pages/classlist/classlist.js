@@ -7,7 +7,7 @@ function _sfc_render(_ctx, _cache) {
     a: common_vendor.f(15, (item, k0, i0) => {
       return {};
     }),
-    b: common_assets._imports_0$2
+    b: common_assets._imports_0$1
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-bd381383"]]);

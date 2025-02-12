@@ -1,9 +1,11 @@
 <template>
 	<view class="themePicture">
 		<navigator class="box" url="/pages/classlist/classlist" v-if="!isMore">
-			<image class="pic" src="/common/images/classify1.jpg" mode="aspectFill"></image>
-			<view class="head">20天前更新</view>
-			<view class="mask">明星美女</view>
+			<image class="pic" :src="item.picurl" mode="aspectFill"></image>
+			<view class="head">
+				{{formatTimeDifference(item.updateTime)}}更新
+			</view>
+			<view class="mask">{{item.name}}</view>
 		</navigator>
 		
 		<navigator class="box more" url="/pages/classify/classify" v-if="isMore" open-type="reLaunch">
@@ -20,10 +22,22 @@
 </template>
 
 <script setup>
+import {formatTimeDifference} from '@/common/scripts/dateFormat.js'
+
 const props = defineProps({
 	isMore:{
 		type:Boolean,
 		default:false
+	},
+	item:{
+		type:Object,
+		default:()=>{
+			return {
+				name:"默认分类",
+				picurl:"/common/images/classify1.jpg",
+				updateTime:Date.now() - 1000*60*60*24*5,
+			}
+		}
 	}
 })
 </script>

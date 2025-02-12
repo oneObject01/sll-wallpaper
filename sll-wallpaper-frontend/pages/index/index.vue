@@ -4,14 +4,8 @@
 		<view class="banner">
 			<swiper circular indicator-dots indicator-color="rgba(255,255,255,0.5)" 
 			indicator-active-color="#fff" autoplay>
-				<swiper-item>
-					<image src="../../common/images/banner1.jpg" mode="aspectFill"></image>
-				</swiper-item>
-				<swiper-item>
-					<image src="../../common/images/banner2.jpg" mode="aspectFill"></image>
-				</swiper-item>
-				<swiper-item>
-					<image src="../../common/images/banner3.jpg" mode="aspectFill"></image>
+				<swiper-item v-for="item in barPic" :key="item._id">
+					<image :src="item.picurl" mode="aspectFill"></image>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -23,9 +17,9 @@
 			</view>
 			<view class="center">
 				<swiper vertical autoplay interval="1500" duration="300" circular>
-					<swiper-item v-for="item in 4">
+					<swiper-item v-for="item in notice" :key="item._id">
 						<navigator url="/pages/notice/detail">
-							文字内容文字内容文字内容文字内容文字内容文字内容文字内容
+							{{item.title}}
 						</navigator>
 					</swiper-item>
 				</swiper>
@@ -49,8 +43,8 @@
 			</common-title>
 			<view class="content">
 				<scroll-view scroll-x >
-					<view class="box" v-for="item in 8">
-						<image src="../../common/images/preview_small.webp" mode="aspectFill"></image>
+					<view class="box" v-for="item in randomPic" :key="item._id">
+						<image :src="item.smallPicurl" @click="goPreview"></image>
 					</view>
 				</scroll-view>
 			</view>
@@ -68,18 +62,23 @@
 				</template>
 			</common-title>
 			<view class="content" >
-				<view class="box" v-for="item in 8">
-					<theme-picture></theme-picture>
+				<view class="box" v-for="item in classifyPic" :key = "item._id">
+					<theme-picture :item="item"></theme-picture>
 				</view>
 				<theme-picture :isMore="true"></theme-picture>
 			</view>
 		</view>
-		
 	</view>
 </template>
 
 <script setup>
+import {ref} from 'vue';
+import { apiGetBarPic,apiGetRandomPic,apiGetNotice,apiGetClassifyPic } from '../../api/apis';
 
+let barPic = ref([])
+let randomPic = ref([])
+let notice = ref([])
+let classifyPic = ref([])
 
 const goPreview = ()=>{
 	uni.navigateTo({
@@ -87,6 +86,31 @@ const goPreview = ()=>{
 	})
 }
 
+const getBarPic = async ()=>{
+	let res = await apiGetBarPic()
+	barPic.value = res.data
+}
+
+const getRandomPic = async ()=>{
+	let res = await apiGetRandomPic()
+	randomPic.value = res.data
+}
+
+const getNotice = async ()=>{
+	let res = await apiGetNotice({select:true})
+	notice.value = res.data
+}
+
+const getClassifyPic = async ()=>{
+	let res = await apiGetClassifyPic({pageSize:8})
+	classifyPic.value = res.data
+	console.log(classifyPic.value)
+}
+
+getBarPic()
+getRandomPic()
+getNotice()
+getClassifyPic()
 </script>
 
 <style lang="scss" scoped>
