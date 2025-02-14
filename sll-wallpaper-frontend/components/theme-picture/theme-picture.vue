@@ -1,6 +1,6 @@
 <template>
 	<view class="themePicture">
-		<navigator class="box" url="/pages/classlist/classlist" v-if="!isMore">
+		<navigator class="box" :url="'/pages/classlist/classlist?id='+item._id" v-if="!isMore">
 			<image class="pic" :src="item.picurl" mode="aspectFill"></image>
 			<view class="head">
 				{{formatTimeDifference(item.updateTime)}}更新
@@ -40,6 +40,7 @@ const props = defineProps({
 		}
 	}
 })
+console.log(props)
 </script>
 
 <style lang="scss" scoped>

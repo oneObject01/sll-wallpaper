@@ -29,18 +29,21 @@ const _sfc_main = {
     }
   },
   setup(__props) {
+    const props = __props;
+    common_vendor.index.__f__("log", "at components/theme-picture/theme-picture.vue:43", props);
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: !__props.isMore
       }, !__props.isMore ? {
         b: __props.item.picurl,
         c: common_vendor.t(common_vendor.unref(common_scripts_dateFormat.formatTimeDifference)(__props.item.updateTime)),
-        d: common_vendor.t(__props.item.name)
+        d: common_vendor.t(__props.item.name),
+        e: "/pages/classlist/classlist?id=" + __props.item._id
       } : {}, {
-        e: __props.isMore
+        f: __props.isMore
       }, __props.isMore ? {
-        f: common_assets._imports_0$3,
-        g: common_vendor.p({
+        g: common_assets._imports_0$2,
+        h: common_vendor.p({
           type: "more-filled",
           size: "30"
         })

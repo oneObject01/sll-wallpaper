@@ -12,8 +12,12 @@ function apiGetNotice(data = {}) {
 function apiGetClassifyPic(data = {}) {
   return utils_request.request({ url: "classify", data });
 }
+function apiGetWallListPic(data = {}) {
+  return utils_request.request({ url: "wallList", data });
+}
 exports.apiGetBarPic = apiGetBarPic;
 exports.apiGetClassifyPic = apiGetClassifyPic;
 exports.apiGetNotice = apiGetNotice;
 exports.apiGetRandomPic = apiGetRandomPic;
+exports.apiGetWallListPic = apiGetWallListPic;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/api/apis.js.map

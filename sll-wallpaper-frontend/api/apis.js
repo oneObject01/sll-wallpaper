@@ -15,3 +15,7 @@ export function apiGetNotice(data={}){
 export function apiGetClassifyPic(data={}){
 	return request({url:'classify',data})
 }
+
+export function apiGetWallListPic(data={}){
+	return request({url:'wallList',data})
+}
