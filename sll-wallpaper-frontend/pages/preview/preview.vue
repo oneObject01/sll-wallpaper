@@ -1,8 +1,8 @@
 <template>
 	<view class="preview">
-		<swiper circular>
-			<swiper-item v-for="item in 5">
-				<image @click="maskChange" src="../../common/images/preview1.jpg" mode="aspectFill"></image>
+		<swiper circular @change="checkCurrent" ref="swiperRef" :current="currentIndex">
+			<swiper-item v-for="item in wallList">
+				<image @click="maskChange" :src="item.smallPicurl" mode="aspectFill"></image>
 			</swiper-item>
 		</swiper>
 		
@@ -11,7 +11,7 @@
 			:style="{top:getStatusBarHeight()+'px'}">
 				<uni-icons type="back" color="#fff" size="20"></uni-icons>
 			</view>
-			<view class="count">3 / 9</view>
+			<view class="count">{{currentIndex+1}} / {{wallList.length}}</view>
 			<view class="time">
 				<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
 			</view>
@@ -42,7 +42,7 @@
 					<view></view>
 					<view class="title">壁纸信息</view>
 					<view class="close" @click="clickInfoClose">
-						<uni-icons type="closeempty" size="18"													color="#999"></uni-icons>
+						<uni-icons type="closeempty" size="18"	color="#999"></uni-icons>
 					</view>
 				</view>
 				<scroll-view scroll-y>
@@ -84,8 +84,8 @@
 							</view>
 						</view>	
 											
-						<view class="copyright">声明：本图片来用户投稿，非商业使用，用于免费学习交流，如侵犯了您的权益，您可以拷贝壁纸ID举报至平台，邮箱513894357@qq.com，管理将删除侵权壁纸，维护您的权益。
-						
+						<view class="copyright">
+							声明：本图片来用户投稿，非商业使用，用于免费学习交流，如侵犯了您的权益，您可以拷贝壁纸ID举报至平台，邮箱513894357@qq.com，管理将删除侵权壁纸，维护您的权益。
 						</view>
 					</view>
 				</scroll-view>
@@ -118,50 +118,78 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref,onMounted} from 'vue';
 import {getStatusBarHeight} from "@/utils/system.js"
+import {onLoad} from "@dcloudio/uni-app"
+
 const maskState =ref(true);
 const infoPopup = ref(null);
 const scorePopup = ref(null);
 const userScore =ref(0)
+let wallList = []
+let currentId = ref(null)
+let swiperRef = ref(null)
+let currentIndex = ref(null)
 
-
-
+onLoad(e=>{
+	let {id,key} = e
+	getStoragePic(key)
+	wallList.forEach(item=>{
+		item.smallPicurl = item.smallPicurl.replace('_small.webp','.jpg')
+	})
+	console.log(wallList)
+	console.log(id)
+	currentIndex.value = wallList.findIndex(item=>{return id==item._id}) + 1
+})
 
 //点击info弹窗
 const clickInfo = ()=>{
-	infoPopup.value.open();
+	infoPopup.value.open()
 }
 
 //点击关闭信息弹窗
 const clickInfoClose = ()=>{
-	infoPopup.value.close();
+	infoPopup.value.close()
 }
 
 //评分弹窗
 const clickScore=()=>{
-	scorePopup.value.open();
+	scorePopup.value.open()
 }
 //关闭评分框
 const clickScoreClose=()=>{
-	scorePopup.value.close();
+	scorePopup.value.close()
 }
 
 //确认评分
 const submitScore=()=>{
-	console.log("评分了");
+	console.log("评分了")
 }
-
 
 //遮罩层状态
 const maskChange = ()=>{
 	maskState.value = !maskState.value
 }
 
-
 //返回上一页
 const goBack= ()=>{
 	uni.navigateBack()
+}
+
+const getStoragePic = (storageKey='')=>{
+	try{
+		wallList = uni.getStorageSync(storageKey)
+		if (wallList) {
+			console.log(wallList)
+		}
+	}catch(err){
+		console.error('获取失败',err)
+	}
+}
+
+const checkCurrent = (e)=>{
+	currentIndex.value = e.detail.current
+	console.log(currentIndex.value)
 }
 </script>
 
