@@ -44,7 +44,7 @@
 			<view class="content">
 				<scroll-view scroll-x >
 					<view class="box" v-for="item in randomPic" :key="item._id">
-						<image :src="item.smallPicurl" @click="goPreview"></image>
+						<image :src="item.smallPicurl" @click="goPreview(item._id)"></image>
 					</view>
 				</scroll-view>
 			</view>
@@ -79,10 +79,12 @@ let barPic = ref([])
 let randomPic = ref([])
 let notice = ref([])
 let classifyPic = ref([])
+let storageKey = 'randomPicKey'
 
-const goPreview = ()=>{
+const goPreview = (id='')=>{
+	uni.setStorageSync(storageKey,randomPic.value)
 	uni.navigateTo({
-		url:"/pages/preview/preview"
+		url:"/pages/preview/preview?id="+id+'&key='+storageKey
 	})
 }
 
@@ -104,7 +106,6 @@ const getNotice = async ()=>{
 const getClassifyPic = async ()=>{
 	let res = await apiGetClassifyPic({pageSize:8})
 	classifyPic.value = res.data
-	console.log(classifyPic.value)
 }
 
 getBarPic()

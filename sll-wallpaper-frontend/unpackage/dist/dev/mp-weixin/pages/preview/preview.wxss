@@ -71,7 +71,7 @@
 .preview .mask .footer.data-v-2dad6c07 {
   background: rgba(255, 255, 255, 0.8);
   bottom: 10vh;
-  width: 65vw;
+  width: 45vw;
   height: 120rpx;
   border-radius: 120rpx;
   color: #000;

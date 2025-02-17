@@ -19,3 +19,7 @@ export function apiGetClassifyPic(data={}){
 export function apiGetWallListPic(data={}){
 	return request({url:'wallList',data})
 }
+
+export function apiDownloadPic(data={}){
+	return request({url:'downloadWall',data})
+}

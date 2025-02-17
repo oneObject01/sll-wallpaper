@@ -24,9 +24,11 @@ const _sfc_main = {
     let randomPic = common_vendor.ref([]);
     let notice = common_vendor.ref([]);
     let classifyPic = common_vendor.ref([]);
-    const goPreview = () => {
+    let storageKey = "randomPicKey";
+    const goPreview = (id = "") => {
+      common_vendor.index.setStorageSync(storageKey, randomPic.value);
       common_vendor.index.navigateTo({
-        url: "/pages/preview/preview"
+        url: "/pages/preview/preview?id=" + id + "&key=" + storageKey
       });
     };
     const getBarPic = async () => {
@@ -44,7 +46,6 @@ const _sfc_main = {
     const getClassifyPic = async () => {
       let res = await api_apis.apiGetClassifyPic({ pageSize: 8 });
       classifyPic.value = res.data;
-      common_vendor.index.__f__("log", "at pages/index/index.vue:107", classifyPic.value);
     };
     getBarPic();
     getRandomPic();
@@ -86,7 +87,7 @@ const _sfc_main = {
         h: common_vendor.f(common_vendor.unref(randomPic), (item, k0, i0) => {
           return {
             a: item.smallPicurl,
-            b: common_vendor.o(goPreview, item._id),
+            b: common_vendor.o(($event) => goPreview(item._id), item._id),
             c: item._id
           };
         }),

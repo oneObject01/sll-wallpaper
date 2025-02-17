@@ -29,8 +29,6 @@ const _sfc_main = {
     }
   },
   setup(__props) {
-    const props = __props;
-    common_vendor.index.__f__("log", "at components/theme-picture/theme-picture.vue:43", props);
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: !__props.isMore
@@ -42,7 +40,7 @@ const _sfc_main = {
       } : {}, {
         f: __props.isMore
       }, __props.isMore ? {
-        g: common_assets._imports_0$2,
+        g: common_assets._imports_0$1,
         h: common_vendor.p({
           type: "more-filled",
           size: "30"

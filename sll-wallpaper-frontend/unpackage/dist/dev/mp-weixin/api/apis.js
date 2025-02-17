@@ -15,6 +15,10 @@ function apiGetClassifyPic(data = {}) {
 function apiGetWallListPic(data = {}) {
   return utils_request.request({ url: "wallList", data });
 }
+function apiDownloadPic(data = {}) {
+  return utils_request.request({ url: "downloadWall", data });
+}
+exports.apiDownloadPic = apiDownloadPic;
 exports.apiGetBarPic = apiGetBarPic;
 exports.apiGetClassifyPic = apiGetClassifyPic;
 exports.apiGetNotice = apiGetNotice;

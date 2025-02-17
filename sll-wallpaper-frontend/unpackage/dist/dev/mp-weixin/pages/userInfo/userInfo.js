@@ -14,7 +14,7 @@ const _sfc_main = {
   setup(__props) {
     const list1 = [
       { key: 101, icon: "download-filled", title: "我的下载", number: 0 },
-      { key: 102, icon: "star-filled", title: "我的评分", number: 2 },
+      // {key:102,icon:"star-filled",title:"我的评分",number:2},
       { key: 102, icon: "chatboxes-filled", title: "联系客服" }
     ];
     const list2 = [
